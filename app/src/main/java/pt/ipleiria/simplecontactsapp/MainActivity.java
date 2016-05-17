@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -48,6 +49,24 @@ public class MainActivity extends AppCompatActivity {
         adapters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         s.setAdapter(adapters);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent,
+                                    View view,
+                                    int position,
+                                    long id) {
+
+                // código que é executado quando se clica
+                // num item da listview
+                Toast.makeText(MainActivity.this, "clicou no item" + position,  Toast.LENGTH_SHORT).show();
+
+                contacts.remove(position);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<main>(MainActivity,this,
+                        android.R.layout.simple_list_item_1, contacts);
+                ListView listView = (ListView) findViewById(R.id.listView_contacts);
+                listView.setAdapter(adapter);
     }
 
     public void onClick_search(View view) {
